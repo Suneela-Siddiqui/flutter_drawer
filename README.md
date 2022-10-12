@@ -7,12 +7,12 @@ Drawer package lets you add a beautiful drawer to your Flutter app.
 1. Add the latest version of package to your pubspec.yaml (and run'dart pub get'):
 ```yaml
 dependencies:
-    flutter_drawer: ^0.0.1
+    flutter_drawer_x: ^0.0.1
 ```
 
 2. Import the package and use it in your Flutter App.
 ```dart
-import 'package:flutter_drawer/flutter_drawer.dart';
+import 'package:flutter_drawer_x/flutter_drawer_x.dart';
 ```
 
 ## Example 

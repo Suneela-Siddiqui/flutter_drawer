@@ -1,7 +1,7 @@
-name: flutter_drawer
+name: flutter_drawer_x
 description: A flutter drawer for your application to reuse it and make your app efficient.
 version: 0.0.1
-homepage: https://github.com/Suneela-Siddiqui/flutter_drawer
+homepage: https://github.com/Suneela-Siddiqui/flutter_drawer_x
 
 environment:
   sdk: ">=2.16.2 <3.0.0"

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_drawer/src/utils/flutter_drawer_typedef.dart';
+import 'package:flutter_drawer_x/src/utils/flutter_drawer_typedef.dart';
 
 class FlutterDrawer extends StatefulWidget {
   const FlutterDrawer({ 

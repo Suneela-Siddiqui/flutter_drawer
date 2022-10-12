@@ -1,0 +1,1 @@
+typedef FlutterDrawerCallback = Function();

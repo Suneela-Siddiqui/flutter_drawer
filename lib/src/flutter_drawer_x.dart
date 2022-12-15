@@ -1,132 +1,134 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_drawer_x/src/utils/flutter_drawer_typedef.dart';
 
-class FlutterDrawer extends StatefulWidget {
-  const FlutterDrawer({ 
+class CustomAppDrawer extends StatelessWidget {
+  const CustomAppDrawer({
     Key? key,
-    this.color1 = Colors.indigo, 
-    this.color2 = Colors.white,
-    this.title = 'Implement Flutter package',
-    
+    required this.listTileItems,
+    this.drawerBodyColor,
+    this.userImagePath = " ",
+    this.userName = " ",
+    this.userLocation = " ",
+    this.dividerThickness,
+    this.dividerHeight,
+    this.dividerColor,
+    this.dividerEndIndent,
+    this.dividerIndent,
   }) : super(key: key);
 
-  final Color? color1;
-  final Color? color2;
-  final String title;
-  @override
-  State<FlutterDrawer> createState() => _FlutterDrawerState();
-}
+  final List<ListTileItem> listTileItems;
+  final Color? drawerBodyColor;
+  final String userImagePath;
+  final String userName;
+  final String userLocation;
+  final double? dividerThickness;
+  final double? dividerHeight;
+  final Color? dividerColor;
+  final double? dividerEndIndent;
+  final double? dividerIndent;
 
-class _FlutterDrawerState extends State<FlutterDrawer> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title)),
-      drawer: SafeArea(
+    return SafeArea(
         child: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                decoration: BoxDecoration(color: widget.color1),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: CircleAvatar(
-                        backgroundColor: widget.color2,
-                        child: Text('R',
-                                style: TextStyle(
-                                  fontSize: 30, color: widget.color1,
-                                ),
-                              ),
-                              minRadius: 40,
-                              maxRadius: 40,
+            backgroundColor: drawerBodyColor ?? Theme.of(context).colorScheme.primary,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              child: Column(
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: NetworkImage(
+                                userImagePath
+                            )
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                        height: 2,
+                      const SizedBox(
+                        height: 18,
                       ),
-                    Text('Ryan', 
-                    style: TextStyle(color: widget.color2, fontSize: 20),
+                      Text(
+                        userName,
+                        style:
+                        const TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        userLocation,
+                        style:
+                        const TextStyle(color: Colors.white, fontSize: 15),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 18),
+                  Divider(
+                    thickness: dividerThickness ?? 1.5,
+                    height: dividerHeight ?? 0.5,
+                    color: dividerColor ?? Colors.white54,
+                    endIndent: dividerEndIndent ?? 28,
+                    indent: dividerEndIndent ?? 28,
+                  ),
+                  const SizedBox(height: 18),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: listTileItems.length,
+                      itemBuilder: (context, index) {
+                        return DrawerTile(listTileItem: listTileItems[index]);
+                      },
                     ),
-                    const SizedBox( 
-                        height: 2,
-                    ),
-                    Text('ryan@gmail.com',
-                      style: TextStyle(color: widget.color2, fontSize: 15),)
-                  ],
-                ),
+                  )
+                ],
               ),
-              ListTile(
-                      onTap: () { },
-                      leading: Icon(
-                        Icons.account_box_rounded,
-                        color: widget.color1,
-                      ),
-                      title: const Text("Profile",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'PTSerif-Bold',
-                              letterSpacing: 0.5)),
-                    ),
-                    const Divider(),
-                    ListTile(
-                      onTap: () {},
-                      leading: Icon(
-                        Icons.chat,
-                        color: widget.color1,
-                      ),
-                      title: const Text("Chat",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'PTSerif-Bold',
-                              letterSpacing: 0.5)),
-                    ),
-                    const Divider(),
-                     ListTile(
-                      onTap: () {},
-                      leading: Icon(
-                        Icons.chat,
-                        color: widget.color1,
-                      ),
-                      title: const Text("Upload Post",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'PTSerif-Bold',
-                              letterSpacing: 0.5)),
-                    ),
-                    const Divider(),
-                    ListTile(
-                      onTap: () {},
-                      leading: Icon(
-                        Icons.chat,
-                        color: widget.color1,
-                      ),
-                      title: const Text("About Us",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'PTSerif-Bold',
-                              letterSpacing: 0.5)),
-                    ),
-                    const Divider(),
-                    ListTile(
-                      onTap: () {},
-                      leading: Icon(
-                        Icons.chat,
-                        color: widget.color1,
-                      ),
-                      title: const Text("Privacy & settings",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'PTSerif-Bold',
-                              letterSpacing: 0.5)),
-                    ), 
-            ],
-          )
-        )),
-      
+            ))
     );
   }
 }
+
+class DrawerTile extends StatelessWidget {
+  const DrawerTile({
+    Key? key,
+    required this.listTileItem,
+  }) : super(key: key);
+
+  final ListTileItem listTileItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      horizontalTitleGap: 0,
+      onTap: listTileItem.onTap,
+      leading: Icon(
+        listTileItem.icon ?? Icons.accessibility,
+        color: listTileItem.iconColor ?? Colors.white,
+      ),
+      title: Text(listTileItem.title.toString(),
+          style: TextStyle(
+              color: listTileItem.titleTextColor ?? Colors.white,
+              fontSize: listTileItem.titleTextfontSize ?? 15,
+              fontFamily: 'PTSerif-Bold',
+              letterSpacing: 0.5)),
+    );
+  }
+}
+
+class ListTileItem {
+  final String title;
+  final IconData? icon;
+  final Function()? onTap;
+  final Color? iconColor;
+  final Color? titleTextColor;
+  final double? titleTextfontSize;
+
+  ListTileItem(
+      {required this.title,
+        required this.icon,
+        this.onTap,
+        this.iconColor,
+        this.titleTextColor,
+        this.titleTextfontSize});
+}
+

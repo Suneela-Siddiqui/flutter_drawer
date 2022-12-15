@@ -19,7 +19,9 @@ import 'package:flutter_drawer_x/flutter_drawer_x.dart';
 These are the properties that you can modify:
 
  - title
- - gradient (color1 and color2)
+ - color
+ - images
+ - number of tiles
 
  <hr>
  <table>
@@ -34,11 +36,23 @@ class FlutterDrawer extends StatelessWidget {
   Widget build(BuildContext context) {  
     return Scaffold(  
       body: Center(  
-        child: const FlutterDrawer(  
-          title: 'Implement Flutter Package',  
-          color1: Colors.indigo,  
-          color2: Colors.white,  
-        ),  
+        child: const CustomAppDrawer(
+      drawerBodyColor: Theme.of(context).colorScheme.primary,
+      userLocation: 'Berlin, Germany',
+      userName: 'Allie Grater',
+      userImagePath: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+        listTileItems: [
+          ListTileItem(
+            onTap: () {},
+            title: 'Blog',
+            icon: Icons.book,
+          ),
+          ListTileItem(
+            onTap: () {},
+          title: 'My Orders',
+          icon: Icons.shopping_bag_rounded)
+        ],
+    ); 
       ),  
     );  
   }  
